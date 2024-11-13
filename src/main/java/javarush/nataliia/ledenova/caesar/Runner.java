@@ -18,7 +18,6 @@ public class Runner {
     }
 
     private static void process(String command, String sourceFilePath, int key) throws IOException {
-        System.out.printf("%s %s %s%n", command, sourceFilePath, key);
         switch (command) {
             case "ENCRYPT" -> {
                 encryptFile(sourceFilePath, "[ENCRYPTED]", key);
