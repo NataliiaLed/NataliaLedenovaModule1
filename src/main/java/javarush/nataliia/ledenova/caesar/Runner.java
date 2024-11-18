@@ -4,6 +4,8 @@ import java.io.IOException;
 
 public class Runner {
     private static final String ALPHABET = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789,.!?:'\"";
+    public static final String ENCRYPTED = "[ENCRYPTED]";
+    public static final String DECRYPTED = "[DECRYPTED]";
 
     public static void main(String[] args) throws IOException {
         if (args.length == 3) {
@@ -20,10 +22,10 @@ public class Runner {
     private static void process(String command, String sourceFilePath, int key) throws IOException {
         switch (command) {
             case "ENCRYPT" -> {
-                encryptFile(sourceFilePath, "[ENCRYPTED]", key);
+                encryptFile(sourceFilePath, ENCRYPTED, key);
             }
             case "DECRYPT" -> {
-                encryptFile(sourceFilePath, "[DECRYPTED]", ALPHABET.length() - key);
+                encryptFile(sourceFilePath, DECRYPTED, ALPHABET.length() - key);
             }
             case "BRUTEFORCE" -> System.out.println("Bruteforce is not implemented yet");
             default -> System.out.println("Command is invalid");
@@ -42,7 +44,7 @@ public class Runner {
         if (lastDotIndex == -1) {
             return filePath + suffix;
         }
-        String prefix = filePath.substring(0, lastDotIndex);
+        String prefix = filePath.substring(0, lastDotIndex).replace(ENCRYPTED, "");
         String extension = filePath.substring(lastDotIndex);
         return prefix + suffix + extension;
     }
